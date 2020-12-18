@@ -34,7 +34,7 @@ export default sources.map((source) => ({
         cleaner({
             targets: [`./${publicDir}`]
         }),
-        postcss({ extract: true }),
+        postcss({ extract: true, minimize: true, sourceMap: false }),
         json(),
         commonjs(),
         visualizer({
@@ -49,7 +49,7 @@ export default sources.map((source) => ({
                 // On extrait les noms des fichiers
                 Object.values(bundle).forEach((file) => {
                     const name = file.fileName.replace(/(?=\.).*/, "") + path.extname(file.fileName);
-                    files = { ...files, [name]: file.fileName };
+                    files = { ...files, [`/${name}`]: `/${file.fileName}` };
                 });
                 // On écrit le fichier mix-manifest.json
                 fs.writeFileSync(path.resolve(__dirname, options.dir, "mix-manifest.json"), JSON.stringify(files), "utf8");
