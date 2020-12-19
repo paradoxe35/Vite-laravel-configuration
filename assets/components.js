@@ -1,11 +1,10 @@
-import { AboutComponent } from "./components/About";
-import { HomeComponent } from "./components/Home";
+import AboutComponent from "./components/About";
+import HomeComponent from "./components/Home";
 
-export default {
+
+const components = {
     HomeComponent,
     AboutComponent
 }
 
-if (import.meta.hot) {
-    import.meta.hot.accept()
-}
+export default components
